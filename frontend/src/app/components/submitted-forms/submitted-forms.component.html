@@ -1,0 +1,44 @@
+<div class="background">
+  <div class="container">
+    <div class="search-bar mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search"
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+      />
+    </div>
+
+    <ul class="request-list">
+      <div *ngIf="filteredRequests.length > 0" class="submitted-requests">
+        <div *ngFor="let request of filteredRequests" class="card mb-3">
+          <div class="card-body request-item">
+            <span class="request-id"><strong>ID:</strong> {{ request.id }}</span>
+            <span class="request-form"><strong>Nume:</strong> {{ request.formTitle }}</span>
+            <span class="request-status"><strong>Status:</strong> {{ request.status }}</span>
+            <button class="btn btn-primary float-end"
+              (click)="donwloadRequest(request.formTitle)"
+              *ngIf="request.status == 'APPROVED'">
+              Download request
+            </button>
+            <button class="btn btn-primary float-end"
+              (click)="modifyRequest(request.id, request.formId)"
+              *ngIf="request.status == 'MODIFICATIONS_REQUIRED'">
+              Modify request
+            </button>
+            <button class="btn btn-primary float-end"
+              (click)="viewForm(request.id)"
+              *ngIf="request.status == 'PENDING'">
+              View request
+            </button>
+          </div>
+        </div>
+      </div>
+    </ul>
+  
+    <div *ngIf="filteredRequests.length === 0" class="no-requests">
+      <p>No submitted forms found.</p>
+    </div>
+  </div>
+</div>

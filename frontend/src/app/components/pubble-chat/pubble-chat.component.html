@@ -1,0 +1,72 @@
+<div class="chat-wrapper">
+  <div class="chat-container">
+    <div id="chat-header" class="chat-header">
+      Chat with Pubble AI
+    </div>
+
+    <div #chatBox id="chat-box" class="chat-box">
+      <div
+        *ngFor="let msg of messages"
+        [ngClass]="msg.sender === 'user' ? 'message-user' : 'message-bot'"
+        class="message"
+      >
+        <div class="message-content">
+          <strong>{{ msg.sender === 'user' ? 'You:' : 'Pubble:' }}</strong>
+          <span [innerHTML]="formatMessageText(msg.displayed)"></span>
+        </div>
+        
+        <!-- Sources section for bot messages -->
+        <div *ngIf="msg.sender === 'bot' && msg.sources && msg.sources.length > 0" class="message-sources">
+          <div class="sources-header">
+            <span class="sources-icon">📚</span>
+            <span class="sources-title">Sources:</span>
+          </div>
+          <div class="sources-list">
+            <div 
+              *ngFor="let source of msg.sources; let i = index" 
+              class="source-item"
+            >
+              <span class="source-number">{{ i + 1 }}.</span>
+              <span class="source-name">{{ getSourceFileName(source) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="spinner-container">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="input-area">
+      <input
+        type="text"
+        id="user-input"
+        [(ngModel)]="message"
+        placeholder="Write a message..."
+        [disabled]="isLoading"
+        (keydown.enter)="sendMessage()"
+      />
+
+      <button
+        class="mic-button"
+        [class.recording]="isRecording"
+        [class.transcribing]="isTranscribing"
+        [disabled]="isLoading || isTranscribing"
+        (click)="toggleRecording()"
+        title="{{ isRecording ? 'Stop recording' : 'Start recording' }}"
+      >
+        <span class="mic-icon">🔴</span>
+        <span *ngIf="isRecording" class="recording-indicator"></span>
+      </button>
+
+      <button
+        class="send-button"
+        [disabled]="isLoading || isRecording || isTranscribing"
+        (click)="sendMessage()"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+</div>

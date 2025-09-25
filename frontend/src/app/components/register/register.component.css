@@ -1,0 +1,150 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container principal */
+.col-md-12 {
+  display: flex;
+  justify-content: center;  /* Centrare orizontală */
+  align-items: center;      /* Centrare verticală */
+  background-color: #f0f2f5;
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  flex-direction: column;   /* Asigură aranjarea verticală a conținutului */
+}
+
+/* Card container */
+.card.card-container {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 40px;
+  width: 90%;               /* Fluid pe ecrane mici */
+  max-width: 900px;         /* Limită pe ecrane mari */
+  margin: 0 auto;           /* Centrare orizontală */
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* Centrare conținut în card */
+}
+
+/* Titlul */
+.card.card-container::before {
+  content: "Create Account";
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Input grupuri */
+.input-groups-row {
+  display: flex;
+  justify-content: space-between;  /* Spațiu egal între inputuri */
+  width: 100%;
+  gap: 20px;                       /* Distanță între ele */
+  flex-wrap: wrap;                 /* Permite trecerea pe rând dacă e nevoie */
+}
+
+.input-group-1,
+.input-group-2 {
+  flex: 1 1 45%;                   /* Minimum 45%, dar flexibil */
+  min-width: 200px;                /* Evită să fie prea mici */
+}
+
+/* Form group styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Form control styling */
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 15px;
+  border: 2px solid #ced4da;
+  border-radius: 8px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #0D47A1;
+  box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.25);
+}
+
+/* Butoane */
+.btn-block {
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  font-size: 16px;
+  margin: 20px auto 0;
+  display: block;
+  text-align: center;
+}
+
+/* Responsivitate */
+@media (max-width: 992px) {
+  .card.card-container {
+    padding: 35px;
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card.card-container {
+    padding: 30px 20px;
+    max-width: 600px;
+  }
+
+  .input-groups-row {
+    flex-direction: column;    /* Elemente una sub alta */
+    gap: 15px;
+  }
+
+  .input-group-1,
+  .input-group-2 {
+    flex: 1 1 100%;            /* Lățime 100% pe mobile */
+  }
+}
+
+@media (max-width: 576px) {
+  .card.card-container {
+    padding: 25px 15px;
+  }
+
+  .card.card-container::before {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .form-control {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .btn-block {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .card.card-container {
+    padding: 20px 10px;
+  }
+
+  .card.card-container::before {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+}
